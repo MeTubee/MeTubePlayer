@@ -6,7 +6,6 @@
 First, connect js and css files of MTP (MeTube Player) in <head> tag.
 ```html
  <head>
-  <link href="https://metubee.xyz/MTP/player/skin.css" rel="stylesheet">
   <script src="https://metubee.xyz/MTP/player/script/player.js"></script>
  </head>
  ```
