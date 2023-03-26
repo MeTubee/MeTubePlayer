@@ -3,7 +3,7 @@
 # How to setup?
 **PLEASE CONNECT JQUERY!!!**
 
-First, connect js and css files of MTP (MeTube Player) in <head> tag.
+First, connect js and css files of MTP (MeTube Player) in head tag.
 ```html
  <head>
   <script src="https://metubee.xyz/MTP/player/script/player.js"></script>
