@@ -11,6 +11,12 @@ First, connect js and css files of MTP (MeTube Player) in <head> tag.
  ```
  Now, in <head> or everywhere you want, write source of video and element (id, class) where player will be.
  ```html
+ <style>
+  #MT_Player{
+    width: 640px;
+    height: 360px;
+  }
+ </style>
 <script>
     var MTP_Values = {
         "PlayerAppendEl": "#MT_Player",
