@@ -3,10 +3,10 @@
 # How to setup?
 **PLEASE CONNECT JQUERY!!!**
 
-First, connect js and css files of MTP (MeTube Player) in head tag.
+First, download files of player and connect js file of MTP (MeTube Player) in head tag.
 ```html
  <head>
-  <script src="https://metubee.xyz/MTP/player/script/player.js"></script>
+  <script src="*path_to_player*/player/script/player.js"></script>
  </head>
  ```
  Now, in <head> or everywhere you want, write source of video and element (id, class) where player will be.
