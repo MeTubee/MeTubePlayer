@@ -298,7 +298,7 @@ $(() => {
     }
     </style>
     <div class="MeTubePlayer">
-    <video src="`+MTP_Values["VideoSource"]+`" autoplayer></video>
+    <video src="`+MTP_Values["VideoSource"]+`" autoplay></video>
     <div class="MTP_Actions">
         <div class="MTP_Progress_Bar">
             <div class="MTP_Progress_Bar_Active" style="width:0px;">
