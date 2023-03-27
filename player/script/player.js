@@ -1,4 +1,4 @@
-// MeTube Player v1.0
+// MeTube Player v1.2
 const formatTime = (s) => {
     var m = Math.floor(s / 60);
     m = (m >= 10) ? m : "0" + m;
@@ -18,11 +18,6 @@ $(() => {
             transform: scale(1.5);
             opacity: 0;
         }
-    }
-    #MT_Player{
-        width:640px;
-        height:360px;
-        transition: all .5s;
     }
     .MeTubePlayer{
         background-color: #000;
