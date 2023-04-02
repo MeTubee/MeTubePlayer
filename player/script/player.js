@@ -467,23 +467,6 @@ $(() => {
             document.querySelector('.MTP_Sound_Bar_Active').style.width = document.querySelector('video').volume * 100 + '%';
         }
     })
-    document.addEventListener('keyup', (event) => {
-        if (event.code === 'Space') {
-            if(!document.querySelector('video').paused){
-                document.querySelector('video').pause();
-                $('#PlayPause').removeClass('MTP_Pause');
-                $('#PlayPause').addClass('MTP_Play');
-            }else{
-                document.querySelector('video').play();
-                $('#PlayPause').removeClass('MTP_Play');
-                $('#PlayPause').addClass('MTP_Pause');
-                $('.MeTubePlayer').prepend('<div class="MTP_Placeholders"><div class="MTP_Play_Placeholder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>ionicons-v5-c</title><polygon points="96 448 416 256 96 64 96 448"/></svg></div></div>');
-                setTimeout(() => {
-                    $('.MTP_Placeholders').remove();
-                }, 290);
-            }
-        }
-    })
     document.querySelector('video').addEventListener("timeupdate", () => {
         $('.MTP_Vid_Duration').text(formatTime(document.querySelector('video').duration));
         $('.MTP_Current_Time').text(formatTime(document.querySelector('video').currentTime));
