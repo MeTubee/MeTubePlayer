@@ -1,5 +1,5 @@
-// MeTube Player v2.0
-// by yaroslav kosygin
+// MeTube Player v1.0
+// More info at https://metubee.xyz/player
 const formatTime = (s) => {
     var m = Math.floor(s / 60);
     m = (m >= 10) ? m : "0" + m;
@@ -44,6 +44,22 @@ $(() => {
         min-height: 26px;
         z-index: 930;
         transition: all 1s;
+    }
+    .MTP_Dropdown{
+        background:#fff;
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius:5px;
+        border:1px solid #666;
+        z-index:100;
+    }
+    .MTP_Dropdown_El{
+        background:#fff;color:#666;margin:5px 0;padding:5px;cursor:pointer;
+    }
+    .MTP_Dropdown_El:hover{
+        background:#666;color:#fff;
     }
     .MTP_Hint_Dur{
         background: rgba(0,0,0, .5);
@@ -317,7 +333,7 @@ $(() => {
     }
     .MTP_play_button{
         position: absolute;
-        background: url(https://metubee.xyz/MTP/player/images/play.png) center/cover;
+        background: url(player/images/play.png) center/cover;
         width: 100px;
         height: 70px;
         filter: grayscale(1) brightness(1.5);
@@ -359,8 +375,10 @@ $(() => {
         </div>
     </div>
 </div>`)
+    $('.MeTubePlayer').click(() => {$('.MTP_Dropdown').remove();})
     document.querySelector('.MeTubePlayer').addEventListener("contextmenu", (e) => {
         e.preventDefault();
+        $('.MeTubePlayer').prepend('<div class="MTP_Dropdown"><div class="MTP_Dropdown_El" onclick="location.href = `https://github.com/MeTubee/MeTubePlayer`">MeTubePlayer on GitHub</div><div class="MTP_Dropdown_El" onclick="location.href = `https://metubee.xyz/user/metube`">MeTubePlayer v2.0</div></div>')
         return false;
     });
     document.querySelector('video').addEventListener("contextmenu", (e) => {
