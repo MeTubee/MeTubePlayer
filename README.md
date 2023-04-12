@@ -3,29 +3,26 @@
 # How to setup?
 **PLEASE CONNECT JQUERY!!!**
 
-First, download files of player and connect js file of MTP (MeTube Player) in head tag.
+First, connect js and css files of MTP (MeTube Player) in <head> tag.
 ```html
  <head>
-  <script src="*path_to_player*/player/script/player.js"></script>
+  <link href="https://metubee.xyz/MTP/https://metubee.xyz/MTP/player/skin.css" rel="stylesheet">
+  <script src="https://metubee.xyz/MTP/https://metubee.xyz/MTP/player/script/player.js"></script>
  </head>
  ```
- Now, in <head> or everywhere you want, write source of video and element (id, class) where player will be.
+ Now, in <head> or everywhere you want, write source of video and element (id, class) where player be.
  ```html
- <style>
-  #MT_Player{
-    width: 640px;
-    height: 360px;
-  }
- </style>
 <script>
     var MTP_Values = {
-        "PlayerAppendEl": "#MT_Player",
-        "VideoSource": "videoplayback.mp4"
+        'PlayerAppendEl': "#MT_Player", // where player will be
+        'VideoSource': "videoplayback.mp4", // path to video
+        'Autoplay': false, // autoplay (true = yes, false = no)
+        'DurationSeconds': 19 // duration of video in seconds
     }
 </script>
 <div id="MT_Player"></div> // PlayerAppendEl
  ```
  # Preview
- You can open player.html to see how the player works
+ You can open player.html to see how player works
  # Found a bug?
 Go to issues and report it

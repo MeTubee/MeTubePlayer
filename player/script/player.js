@@ -1,4 +1,5 @@
-// MeTube Player v1.2
+// MeTube Player v1.0
+// More info at https://metubee.xyz/player
 const formatTime = (s) => {
     var m = Math.floor(s / 60);
     m = (m >= 10) ? m : "0" + m;
@@ -11,6 +12,13 @@ var bufferingDetected = false;
 var lastPlayPos = 0;
 var currentPlayPos = 0;
 $(() => {
+    if(MTP_Values['Autoplay'] === true){
+        var autoplay = "autoplay";
+        var button = "";
+    }else{
+        var autoplay = "";
+        var button = "<div class='MTP_play_button'></div>";
+    }
     $(MTP_Values["PlayerAppendEl"]).prepend(`
     <style>
     @keyframes MTP_Animation_FullScreen {
@@ -36,6 +44,17 @@ $(() => {
         min-height: 26px;
         z-index: 930;
         transition: all 1s;
+    }
+    .MTP_Hint_Dur{
+        background: rgba(0,0,0, .5);
+        color: #fff;
+        padding: 5px;
+        font-size: 12px;
+        font-weight: bold;
+        position: absolute;
+        width:auto;
+        bottom: 10px;
+        border-radius: 5px;
     }
     .MTP_Full_Screened{
         background: no-repeat url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0 -2187px!important;
@@ -296,9 +315,23 @@ $(() => {
         display: flex;
         align-items: center;
     }
+    .MTP_play_button{
+        position: absolute;
+        background: url(player/images/play.png) center/cover;
+        width: 100px;
+        height: 70px;
+        filter: grayscale(1) brightness(1.5);
+        top:50%;
+        left:50%;
+        transform:translate(-50%, -50%);
+    }
+    .MeTubePlayer:hover .MTP_play_button{
+        filter: grayscale(0) brightness(1);
+    }
     </style>
     <div class="MeTubePlayer">
-    <video src="`+MTP_Values["VideoSource"]+`" autoplay></video>
+    ` + button + `
+    <video src="`+MTP_Values["VideoSource"]+`" ` + autoplay + `></video>
     <div class="MTP_Actions">
         <div class="MTP_Progress_Bar">
             <div class="MTP_Progress_Bar_Active" style="width:0px;">
@@ -317,7 +350,7 @@ $(() => {
                     </div>
                 </div>
                 <div class="MTP_Duration">
-                    <span class="MTP_Current_Time">00:00</span> / <span class="MTP_Vid_Duration">Loading...</span>
+                    <span class="MTP_Current_Time">00:00</span> / <span class="MTP_Vid_Duration">` + formatTime(MTP_Values['DurationSeconds']) + `</span>
                 </div>
             </div>
             <div class="MTP_Actions_Right">
@@ -444,6 +477,14 @@ $(() => {
         $('#PlayPause').addClass('MTP_Play');
         $('.MTP_Actions').css('transform', 'translateY(0px)');
     }
+    document.querySelector('video').addEventListener('play', () => {
+        document.querySelector('video').play();
+        $('#PlayPause').addClass('MTP_Pause');
+        $('#PlayPause').removeClass('MTP_Play');
+        if($('.MTP_play_button').length != 0){
+            $('.MTP_play_button').remove();
+        }
+    })
     document.querySelector('video').addEventListener('pause', () => {
         document.querySelector('video').pause();
         $('#PlayPause').removeClass('MTP_Pause');
@@ -471,5 +512,26 @@ $(() => {
         $('.MTP_Vid_Duration').text(formatTime(document.querySelector('video').duration));
         $('.MTP_Current_Time').text(formatTime(document.querySelector('video').currentTime));
         document.querySelector('.MTP_Progress_Bar_Active').style.width = (document.querySelector('video').currentTime / document.querySelector('video').duration) * 100 + '%';
+    })
+    setInterval(() => {
+        if($('.MTP_Hint_Dur').length > 1){
+            $('.MTP_Hint_Dur').remove();
+        }
+    }, 50)
+    $('.MTP_Progress_Bar').mouseover(() => {
+        if($('.MTP_Hint_Dur').length > 1){
+            $('.MTP_Hint_Dur').remove();
+        }
+    })
+    $('.MTP_Progress_Bar').mouseout(() => {
+        $('.MTP_Hint_Dur').remove();
+    })
+    $('.MTP_Progress_Bar').mousemove((e) => {
+        if($('.MTP_Hint_Dur').length > 1){
+            $('.MTP_Hint_Dur').remove();
+        }
+        if(formatTime((e.offsetX / document.querySelector('.MTP_Progress_Bar').offsetWidth) * document.querySelector('video').duration) != '00:00'){
+            $('.MTP_Progress_Bar').prepend('<div class="MTP_Hint_Dur" style="left:calc('+ e.offsetX +'px - 20px)">'+ formatTime((e.offsetX / document.querySelector('.MTP_Progress_Bar').offsetWidth) * document.querySelector('video').duration) +'</div>');
+        }
     })
 });
