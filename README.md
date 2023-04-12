@@ -6,8 +6,7 @@
 First, connect js and css files of MTP (MeTube Player) in <head> tag.
 ```html
  <head>
-  <link href="https://metubee.xyz/MTP/https://metubee.xyz/MTP/player/skin.css" rel="stylesheet">
-  <script src="https://metubee.xyz/MTP/https://metubee.xyz/MTP/player/script/player.js"></script>
+  <script src="/player/script/player.js"></script>
  </head>
  ```
  Now, in <head> or everywhere you want, write source of video and element (id, class) where player be.
