@@ -1,5 +1,5 @@
-// MeTube Player v1.0
-// More info at https://metubee.xyz/player
+// MeTube Player v2.0
+// by yaroslav kosygin
 const formatTime = (s) => {
     var m = Math.floor(s / 60);
     m = (m >= 10) ? m : "0" + m;
