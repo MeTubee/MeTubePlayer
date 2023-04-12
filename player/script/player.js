@@ -317,7 +317,7 @@ $(() => {
     }
     .MTP_play_button{
         position: absolute;
-        background: url(player/images/play.png) center/cover;
+        background: url(https://metubee.xyz/MTP/player/images/play.png) center/cover;
         width: 100px;
         height: 70px;
         filter: grayscale(1) brightness(1.5);
