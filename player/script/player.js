@@ -27,11 +27,6 @@ $(() => {
             opacity: 0;
         }
     }
-    #MT_Player{
-        width:640px;
-        height:360px;
-        transition: all .5s;
-    }
     .MeTubePlayer{
         background-color: #000;
         width: 100%;
