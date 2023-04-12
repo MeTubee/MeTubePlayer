@@ -12,6 +12,13 @@ var bufferingDetected = false;
 var lastPlayPos = 0;
 var currentPlayPos = 0;
 $(() => {
+    if(MTP_Values['Autoplay'] === true){
+        var autoplay = "autoplay";
+        var button = "";
+    }else{
+        var autoplay = "";
+        var button = "<div class='MTP_play_button'></div>";
+    }
     $(MTP_Values["PlayerAppendEl"]).prepend(`
     <style>
     @keyframes MTP_Animation_FullScreen {
@@ -43,8 +50,19 @@ $(() => {
         z-index: 930;
         transition: all 1s;
     }
+    .MTP_Hint_Dur{
+        background: rgba(0,0,0, .5);
+        color: #fff;
+        padding: 5px;
+        font-size: 12px;
+        font-weight: bold;
+        position: absolute;
+        width:auto;
+        bottom: 10px;
+        border-radius: 5px;
+    }
     .MTP_Full_Screened{
-        background: no-repeat url(player/images/player-darkhh-vflvDcUVL.png) 0 -2187px!important;
+        background: no-repeat url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0 -2187px!important;
     }
     .MTP_Button{
         border: none;
@@ -54,22 +72,22 @@ $(() => {
         outline: rgb(153, 153, 153) dotted 1px;
     }
     .MTP_Actions_Main .MTP_Pause{
-        background: url(player/images/player-darkhh-vflvDcUVL.png) 0px -1134px no-repeat;
+        background: url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0px -1134px no-repeat;
         height: 25px;
         width: 55px;
     }
     .MTP_Actions_Main .MTP_Pause:hover{
-        background: url(player/images/player-darkhh-vflvDcUVL.png) 0px -513px no-repeat;
+        background: url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0px -513px no-repeat;
     }
     .MTP_Actions_Main{
         display: flex;
         align-items: center;
     }
     .MTP_Sound_Full{
-        background: url(player/images/player-darkhh-vflvDcUVL.png) 0px -1485px no-repeat;
+        background: url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0px -1485px no-repeat;
     }
     .MTP_Sound_Full:hover{
-        background: url(player/images/player-darkhh-vflvDcUVL.png) 0px -378px no-repeat;
+        background: url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0px -378px no-repeat;
     }
     .MTP_Sound{
         height: 25px;
@@ -98,12 +116,12 @@ $(() => {
         margin-left:auto;
     }
     .MTP_Full_Screen{
-        background: url(player/images/player-darkhh-vflvDcUVL.png) 0px -1998px no-repeat;
+        background: url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0px -1998px no-repeat;
         height: 25px;
         width: 30px;
     }
     .MTP_Full_Screen:hover{
-        background: url(player/images/player-darkhh-vflvDcUVL.png) 0px -1377px no-repeat;
+        background: url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0px -1377px no-repeat;
     }
     .MTP_Progress_Bar{
         background: rgb(42 42 42);
@@ -122,7 +140,7 @@ $(() => {
         transition: .5s;
     }
     .MTP_Scrubber{
-        background: url(player/images/player-common-vfloYYly0.png) -73px -11px no-repeat;
+        background: url(https://metubee.xyz/MTP/player/images/player-common-vfloYYly0.png) -73px -11px no-repeat;
         z-index: auto;
         height: 17px;
         width: 16px;
@@ -150,12 +168,12 @@ $(() => {
         cursor: pointer!important;
     }
     .MTP_Play{
-        background: url(player/images/player-darkhh-vflvDcUVL.png) 0px -1323px no-repeat;
+        background: url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0px -1323px no-repeat;
         height: 25px;
         width: 55px;
     }
     .MTP_Play:hover{
-        background: url(player/images/player-darkhh-vflvDcUVL.png) 0px -459px no-repeat;
+        background: url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0px -459px no-repeat;
     }
     @keyframes MTP_Animation_Placeholder {
         0%{
@@ -252,29 +270,29 @@ $(() => {
         left:50%;
     }
     .MTP_Sound_Mute{
-        background: no-repeat url(player/images/player-darkhh-vflvDcUVL.png) 0 -1107px!important;
+        background: no-repeat url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0 -1107px!important;
     }
     .MTP_Large_Player{
-        background: no-repeat url(player/images/player-darkhh-vflvDcUVL.png) 0 -1458px;
+        background: no-repeat url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0 -1458px;
         height: 25px;
         width: 30px;
     }
     .MTP_Large_Player:hover{
-        background: no-repeat url(player/images/player-darkhh-vflvDcUVL.png) 0 -1620px;
+        background: no-repeat url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0 -1620px;
     }
     .MTP_Mini_Player{
-        background: no-repeat url(player/images/player-darkhh-vflvDcUVL.png) 0 -918px;
+        background: no-repeat url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0 -918px;
         height: 25px;
         width: 30px;
     }
     .MTP_Mini_Player:hover{
-        background: no-repeat url(player/images/player-darkhh-vflvDcUVL.png) 0 -1836px;
+        background: no-repeat url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0 -1836px;
     }
     .MTP_Mini_Player_Active{
-        background: no-repeat url(player/images/player-darkhh-vflvDcUVL.png) 0 -621px!important;
+        background: no-repeat url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0 -621px!important;
     }
     .MTP_Large_Player_Active{
-        background: no-repeat url(player/images/player-darkhh-vflvDcUVL.png) 0 -972px!important;
+        background: no-repeat url(https://metubee.xyz/MTP/player/images/player-darkhh-vflvDcUVL.png) 0 -972px!important;
     }
     .MTP_Sound_Bar{
         margin-left: 5px;
@@ -302,9 +320,23 @@ $(() => {
         display: flex;
         align-items: center;
     }
+    .MTP_play_button{
+        position: absolute;
+        background: url(player/images/play.png) center/cover;
+        width: 100px;
+        height: 70px;
+        filter: grayscale(1) brightness(1.5);
+        top:50%;
+        left:50%;
+        transform:translate(-50%, -50%);
+    }
+    .MeTubePlayer:hover .MTP_play_button{
+        filter: grayscale(0) brightness(1);
+    }
     </style>
     <div class="MeTubePlayer">
-    <video src="`+MTP_Values["VideoSource"]+`" autoplayer></video>
+    ` + button + `
+    <video src="`+MTP_Values["VideoSource"]+`" ` + autoplay + `></video>
     <div class="MTP_Actions">
         <div class="MTP_Progress_Bar">
             <div class="MTP_Progress_Bar_Active" style="width:0px;">
@@ -323,7 +355,7 @@ $(() => {
                     </div>
                 </div>
                 <div class="MTP_Duration">
-                    <span class="MTP_Current_Time">00:00</span> / <span class="MTP_Vid_Duration">Loading...</span>
+                    <span class="MTP_Current_Time">00:00</span> / <span class="MTP_Vid_Duration">` + formatTime(MTP_Values['DurationSeconds']) + `</span>
                 </div>
             </div>
             <div class="MTP_Actions_Right">
@@ -450,6 +482,14 @@ $(() => {
         $('#PlayPause').addClass('MTP_Play');
         $('.MTP_Actions').css('transform', 'translateY(0px)');
     }
+    document.querySelector('video').addEventListener('play', () => {
+        document.querySelector('video').play();
+        $('#PlayPause').addClass('MTP_Pause');
+        $('#PlayPause').removeClass('MTP_Play');
+        if($('.MTP_play_button').length != 0){
+            $('.MTP_play_button').remove();
+        }
+    })
     document.querySelector('video').addEventListener('pause', () => {
         document.querySelector('video').pause();
         $('#PlayPause').removeClass('MTP_Pause');
@@ -464,35 +504,39 @@ $(() => {
         document.querySelector('video').currentTime = (e.offsetX / document.querySelector('.MTP_Progress_Bar').offsetWidth) * document.querySelector('video').duration;
     })
     $('.MTP_Sound_Bar').click((e) => {
-        document.querySelector('video').volume = (e.offsetX / document.querySelector('.MTP_Sound_Bar').offsetWidth) / 100;
+        document.querySelector('video').volume = e.offsetX / document.querySelector('.MTP_Sound_Bar').offsetWidth;
     })
     document.querySelector('video').addEventListener("volumechange", () => {
         if(document.querySelector('video').volume == 1){
             document.querySelector('.MTP_Sound_Bar_Active').style.width = 100 + '%'
         }else{
-            document.querySelector('.MTP_Sound_Bar_Active').style.width = document.querySelector('video').volume * 10000 + '%';
-        }
-    })
-    document.addEventListener('keyup', (event) => {
-        if (event.code === 'Space') {
-            if(!document.querySelector('video').paused){
-                document.querySelector('video').pause();
-                $('#PlayPause').removeClass('MTP_Pause');
-                $('#PlayPause').addClass('MTP_Play');
-            }else{
-                document.querySelector('video').play();
-                $('#PlayPause').removeClass('MTP_Play');
-                $('#PlayPause').addClass('MTP_Pause');
-                $('.MeTubePlayer').prepend('<div class="MTP_Placeholders"><div class="MTP_Play_Placeholder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>ionicons-v5-c</title><polygon points="96 448 416 256 96 64 96 448"/></svg></div></div>');
-                setTimeout(() => {
-                    $('.MTP_Placeholders').remove();
-                }, 290);
-            }
+            document.querySelector('.MTP_Sound_Bar_Active').style.width = document.querySelector('video').volume * 100 + '%';
         }
     })
     document.querySelector('video').addEventListener("timeupdate", () => {
         $('.MTP_Vid_Duration').text(formatTime(document.querySelector('video').duration));
         $('.MTP_Current_Time').text(formatTime(document.querySelector('video').currentTime));
         document.querySelector('.MTP_Progress_Bar_Active').style.width = (document.querySelector('video').currentTime / document.querySelector('video').duration) * 100 + '%';
+    })
+    setInterval(() => {
+        if($('.MTP_Hint_Dur').length > 1){
+            $('.MTP_Hint_Dur').remove();
+        }
+    }, 50)
+    $('.MTP_Progress_Bar').mouseover(() => {
+        if($('.MTP_Hint_Dur').length > 1){
+            $('.MTP_Hint_Dur').remove();
+        }
+    })
+    $('.MTP_Progress_Bar').mouseout(() => {
+        $('.MTP_Hint_Dur').remove();
+    })
+    $('.MTP_Progress_Bar').mousemove((e) => {
+        if($('.MTP_Hint_Dur').length > 1){
+            $('.MTP_Hint_Dur').remove();
+        }
+        if(formatTime((e.offsetX / document.querySelector('.MTP_Progress_Bar').offsetWidth) * document.querySelector('video').duration) != '00:00'){
+            $('.MTP_Progress_Bar').prepend('<div class="MTP_Hint_Dur" style="left:calc('+ e.offsetX +'px - 20px)">'+ formatTime((e.offsetX / document.querySelector('.MTP_Progress_Bar').offsetWidth) * document.querySelector('video').duration) +'</div>');
+        }
     })
 });
