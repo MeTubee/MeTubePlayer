@@ -9,7 +9,7 @@ First, connect js and css files of MTP (MeTube Player) in <head> tag.
   <script src="/player/script/player.js"></script>
  </head>
  ```
- Now, in <head> or everywhere you want, write source of video and element (id, class) where player be.
+ Now, in head or everywhere you want, write source of video and element (id, class) where player be.
  ```html
 <script>
     var MTP_Values = {
