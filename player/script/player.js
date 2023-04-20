@@ -43,7 +43,7 @@ $(() => {
         bottom: 0px;
         min-height: 26px;
         z-index: 930;
-        transition: all 1s;
+            transition: all .2s;
     }
     .MTP_Dropdown{
         background:#fff;
